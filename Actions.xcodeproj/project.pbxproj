@@ -17,6 +17,11 @@
 		BA0338D32A8E58360062D358 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338D22A8E58360062D358 /* DetailsView.swift */; };
 		BA0338D52A8E63BF0062D358 /* NewHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338D42A8E63BF0062D358 /* NewHabitView.swift */; };
 		BA76FC532A9E19D70080C21E /* HomeHabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC522A9E19D70080C21E /* HomeHabitsView.swift */; };
+		BA76FC562AA755F70080C21E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC552AA755F70080C21E /* ColorExtension.swift */; };
+		BA76FC5B2AA757110080C21E /* sound-rise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA76FC582AA757110080C21E /* sound-rise.mp3 */; };
+		BA76FC5C2AA757110080C21E /* sound-ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA76FC592AA757110080C21E /* sound-ding.mp3 */; };
+		BA76FC5D2AA757110080C21E /* sound-tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA76FC5A2AA757110080C21E /* sound-tap.mp3 */; };
+		BA76FC5F2AA7575E0080C21E /* HideKeyBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC5E2AA7575E0080C21E /* HideKeyBoardExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +36,11 @@
 		BA0338D22A8E58360062D358 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		BA0338D42A8E63BF0062D358 /* NewHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabitView.swift; sourceTree = "<group>"; };
 		BA76FC522A9E19D70080C21E /* HomeHabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHabitsView.swift; sourceTree = "<group>"; };
+		BA76FC552AA755F70080C21E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		BA76FC582AA757110080C21E /* sound-rise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sound-rise.mp3"; sourceTree = "<group>"; };
+		BA76FC592AA757110080C21E /* sound-ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sound-ding.mp3"; sourceTree = "<group>"; };
+		BA76FC5A2AA757110080C21E /* sound-tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sound-tap.mp3"; sourceTree = "<group>"; };
+		BA76FC5E2AA7575E0080C21E /* HideKeyBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyBoardExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +73,8 @@
 		BA0338BB2A8E54150062D358 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
+				BA76FC572AA756E70080C21E /* Sound */,
+				BA76FC542AA755C20080C21E /* Utilities */,
 				BA0338CF2A8E546E0062D358 /* Views */,
 				BA0338BC2A8E54150062D358 /* ActionsApp.swift */,
 				BA0338BE2A8E54150062D358 /* ContentView.swift */,
@@ -91,6 +103,25 @@
 				BA76FC522A9E19D70080C21E /* HomeHabitsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BA76FC542AA755C20080C21E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BA76FC552AA755F70080C21E /* ColorExtension.swift */,
+				BA76FC5E2AA7575E0080C21E /* HideKeyBoardExtension.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		BA76FC572AA756E70080C21E /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				BA76FC592AA757110080C21E /* sound-ding.mp3 */,
+				BA76FC582AA757110080C21E /* sound-rise.mp3 */,
+				BA76FC5A2AA757110080C21E /* sound-tap.mp3 */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,7 +182,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA76FC5C2AA757110080C21E /* sound-ding.mp3 in Resources */,
+				BA76FC5B2AA757110080C21E /* sound-rise.mp3 in Resources */,
 				BA0338C42A8E54180062D358 /* Preview Assets.xcassets in Resources */,
+				BA76FC5D2AA757110080C21E /* sound-tap.mp3 in Resources */,
 				BA0338C12A8E54180062D358 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,9 +197,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA76FC5F2AA7575E0080C21E /* HideKeyBoardExtension.swift in Sources */,
 				BA0338D12A8E548A0062D358 /* WelcomeView.swift in Sources */,
 				BA0338C62A8E54180062D358 /* Persistence.swift in Sources */,
 				BA0338D52A8E63BF0062D358 /* NewHabitView.swift in Sources */,
+				BA76FC562AA755F70080C21E /* ColorExtension.swift in Sources */,
 				BA0338C92A8E54180062D358 /* Actions.xcdatamodeld in Sources */,
 				BA0338BF2A8E54150062D358 /* ContentView.swift in Sources */,
 				BA0338BD2A8E54150062D358 /* ActionsApp.swift in Sources */,
