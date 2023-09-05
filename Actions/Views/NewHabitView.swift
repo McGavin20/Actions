@@ -10,12 +10,19 @@ import SwiftUI
 struct NewHabitView: View {
     //Properties
     @State private var habitTitle = ""
+    @State private var selectedColor: Color = .customGrayLight //Default Color
     
     var body: some View {
         NavigationView {
-            TextField("Title", text: $habitTitle)
-                .textFieldStyle(.roundedBorder)
-                .padding()
+            VStack {
+                TextField("Title", text: $habitTitle)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                Spacer()
+                
+                
+                
+            }
             
         }
         .navigationBarBackButtonHidden(true)
