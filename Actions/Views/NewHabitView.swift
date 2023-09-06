@@ -36,6 +36,9 @@ struct NewHabitView: View {
                 //Spacer()
                 CircleColorPicker(selectedColor: $selectedColor)
                 
+                FrequencyView()
+                    .padding()
+                
    
             }
         }
