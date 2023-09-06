@@ -18,6 +18,7 @@ struct FrequencyView: View {
             HStack() {
                 Button(action: {
                     // Handle Daily button action
+                    print("Button pressed: Daily")
                 }, label: {
                     ZStack {
                         Capsule()
@@ -30,6 +31,7 @@ struct FrequencyView: View {
                 
                 Button(action: {
                     isWeeklyViewExpanded.toggle() // Toggle the state to expand/collapse
+                    print("Weekly View Button pressed")
                 }, label: {
                     ZStack {
                         Capsule()

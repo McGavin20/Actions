@@ -19,12 +19,13 @@ struct NewHabitView: View {
                 HStack {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
+                        print("Button pressed: Cancel")
                     }, label: {
                         Text("Cancel")
                     })
                     Spacer()
                     Button(action: {
-                        
+                        print("Button pressed: Done")
                     }, label: {
                         Text("Done")
                     })
