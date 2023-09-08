@@ -21,7 +21,7 @@ struct DetailsView: View {
             VStack {
                 
                 TextField("Name", text: nonOptionalBinding($name))
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(RoundedBorderTextFieldStyle())                   
                     .padding()
                 
                 TextField("Age", text: nonOptionalBinding($age))

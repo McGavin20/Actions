@@ -25,7 +25,7 @@ struct WelcomeView: View {
                         .fontWeight(.bold)
                     Text("Don't break the chain.")
                         .font(.footnote)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.customGrayLight)
                 }
                 Spacer()
                 
@@ -37,7 +37,7 @@ struct WelcomeView: View {
                 .font(.headline)
                 .foregroundColor(.black)
                 .padding()
-                .background(Color.blue)
+                .background(Color.customSalmonLight)
                 .cornerRadius(10)
                 
                 .sheet(isPresented: $isSheetPresented) {

@@ -14,6 +14,7 @@ struct ActionsApp: App {
     var body: some Scene {
         WindowGroup {
             WelcomeView()
+                .preferredColorScheme(.dark)
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
