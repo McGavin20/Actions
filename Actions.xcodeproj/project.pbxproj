@@ -25,6 +25,7 @@
 		BA76FC622AA75C1F0080C21E /* CircleColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC612AA75C1F0080C21E /* CircleColorPicker.swift */; };
 		BA76FC642AA765140080C21E /* FrequencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC632AA765140080C21E /* FrequencyView.swift */; };
 		BA76FC662AA8A0BD0080C21E /* WeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC652AA8A0BD0080C21E /* WeeklyView.swift */; };
+		BA76FC682AAF3ED60080C21E /* AddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC672AAF3ED60080C21E /* AddButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		BA76FC612AA75C1F0080C21E /* CircleColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleColorPicker.swift; sourceTree = "<group>"; };
 		BA76FC632AA765140080C21E /* FrequencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyView.swift; sourceTree = "<group>"; };
 		BA76FC652AA8A0BD0080C21E /* WeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyView.swift; sourceTree = "<group>"; };
+		BA76FC672AAF3ED60080C21E /* AddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				BA76FC612AA75C1F0080C21E /* CircleColorPicker.swift */,
 				BA76FC632AA765140080C21E /* FrequencyView.swift */,
 				BA76FC652AA8A0BD0080C21E /* WeeklyView.swift */,
+				BA76FC672AAF3ED60080C21E /* AddButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA76FC682AAF3ED60080C21E /* AddButtonView.swift in Sources */,
 				BA76FC5F2AA7575E0080C21E /* HideKeyBoardExtension.swift in Sources */,
 				BA0338D12A8E548A0062D358 /* WelcomeView.swift in Sources */,
 				BA0338C62A8E54180062D358 /* Persistence.swift in Sources */,
