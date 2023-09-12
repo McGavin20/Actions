@@ -42,6 +42,7 @@ struct DetailsView: View {
                     )
                     .hidden()
                     .id(UUID())
+                    // Proceed Button
                     Button(action: {
                         showNewHabitView = true
                         print("Proceed button was pressed.")

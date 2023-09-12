@@ -10,14 +10,26 @@ import SwiftUI
 struct HomeHabitsView: View {
     
     var body: some View {
-        VStack {
-            
+        NavigationView {
+            ZStack {
+                // Displayed Habits to be tracked.
+                
+                VStack {
+                    Spacer()
+                    
+                    HStack {
+                        Spacer()
+                        
+                        AddButtonView()
+                            .padding(25)
+                    }
+                }
+            }
         }
-        
-        AddButtonView()
+        .navigationBarBackButtonHidden(true)
     }
+    
 }
-
 
 struct HomeHabitsView_Previews: PreviewProvider {
     static var previews: some View {
