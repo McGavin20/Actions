@@ -36,7 +36,7 @@ struct DetailsView: View {
                 HStack {
                     // Buttons
                     NavigationLink(
-                        destination: NewHabitView(),
+                        destination: NewHabitView(habitData: HabitData()),
                         isActive: $isNavigating,
                         label: { EmptyView() }
                     )
