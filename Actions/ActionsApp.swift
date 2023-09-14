@@ -15,8 +15,8 @@ struct ActionsApp: App {
         WindowGroup {
             WelcomeView()
                 .preferredColorScheme(.dark)
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

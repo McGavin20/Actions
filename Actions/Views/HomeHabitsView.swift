@@ -19,6 +19,7 @@ struct HomeHabitsView: View {
                 List {
                     ForEach(habitData.habits) { habit in
                         Text("Habit Title: \(habit.title ?? "")")
+                            .foregroundColor(.customGrayLight)
                     }
                     .onDelete(perform: deleteHabit)
                 }
