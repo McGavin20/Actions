@@ -21,7 +21,7 @@ struct AddButtonView: View {
                     .resizable()
                     .frame(width: 65, height: 65)
                     .foregroundColor(.customSalmonLight)
-                    .scaleEffect(isAnimated ? 1.2 : 1)
+                    .scaleEffect(isAnimated ? 0.6 : 1)
                     .onAppear() {
                         withAnimation(Animation.easeInOut(duration: 0.5).repeatForever()) {
                             self.isAnimated.toggle()

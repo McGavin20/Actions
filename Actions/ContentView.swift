@@ -10,11 +10,11 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    @ObservedObject var habitData: HabitData
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Habit.timestamp, ascending: true)],
         animation: .default)
-    private var habits: FetchedResults<Habit>
+    var habits: FetchedResults<Habit> // Remove 'private' here
 
     var body: some View {
         NavigationView {
@@ -45,8 +45,9 @@ struct ContentView: View {
     private func addHabit() {
         withAnimation {
             let newHabit = Habit(context: viewContext)
-            newHabit.timestamp = Date() 
-
+            newHabit.timestamp = Date()
+            habitData.addHabit(newHabit) // Add the new habit to habitData
+            
             do {
                 try viewContext.save()
             } catch {
@@ -72,6 +73,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(habitData: HabitData())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+

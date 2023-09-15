@@ -12,6 +12,7 @@ struct NewHabitView: View {
     // Properties
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
+    
     @State private var habitTitle = ""
     @State private var selectedColor: Color = .customGrayLight // Default Color
     @State private var isHomeHabitsViewActive = false
@@ -78,6 +79,8 @@ struct NewHabitView: View {
         
         do {
             try viewContext.save()
+            habitData.addHabit(newHabit) // Add the new habit to habitData
+            self.presentationMode.wrappedValue.dismiss()
         } catch {
             // Handle the error here.
             print("Error saving habit: \(error.localizedDescription)")
