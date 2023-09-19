@@ -14,34 +14,33 @@ struct ContentView: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Habit.timestamp, ascending: true)],
         animation: .default)
-    var habits: FetchedResults<Habit> // Remove 'private' here
+    var habits: FetchedResults<Habit>
+    @State private var isAddingNewHabit = false
+
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(habits) { habit in
-                    NavigationLink {
-                        Text("Habit Title: \(habit.title ?? "")")
-                    } label: {
-                        Text("Habit Title: \(habit.title ?? "")")
-                    }
-                }
-                .onDelete(perform: deleteHabits)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addHabit) {
-                        Label("Add Habit", systemImage: "plus")
-                    }
-                }
-            }
             Text("Select a habit")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem {
+                        Button(action: {
+                            // Set the state variable to true to display the NewHabitView
+                            isAddingNewHabit = true
+                        }) {
+                            Label("Add Habit", systemImage: "plus")
+                        }
+                    }
+                }
+                .sheet(isPresented: $isAddingNewHabit) {
+                    NewHabitView(habitData: habitData)
+                }
         }
     }
-
+    
     private func addHabit() {
         withAnimation {
             let newHabit = Habit(context: viewContext)
@@ -56,11 +55,11 @@ struct ContentView: View {
             }
         }
     }
-
+    
     private func deleteHabits(offsets: IndexSet) {
         withAnimation {
             offsets.map { habits[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {
