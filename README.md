@@ -10,4 +10,5 @@ Habit Tracker App for iOS
 ## App Features 
 
  * Calender
+ * Tracking Habits
  *  
