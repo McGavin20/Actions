@@ -9,6 +9,8 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var habitData: HabitData
     @FetchRequest(
@@ -20,21 +22,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            Text("Select a habit")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: {
-                            // Set the state variable to true to display the NewHabitView
-                            isAddingNewHabit = true
-                        }) {
-                            Label("Add Habit", systemImage: "plus")
-                        }
-                    }
-                }
+            HomeHabitsView(habitData: habitData)
                 .sheet(isPresented: $isAddingNewHabit) {
                     NewHabitView(habitData: habitData)
                 }
