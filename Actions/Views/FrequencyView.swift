@@ -44,7 +44,7 @@ struct FrequencyView: View {
                     
             }
             if isWeeklyViewExpanded {
-                NavigationLink("", destination: WeeklyView(selectedDays: $selectedDays), isActive: $isWeeklyViewExpanded)
+                WeeklyView(selectedDays: $selectedDays)
             }
         }
     }

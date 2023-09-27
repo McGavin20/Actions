@@ -65,6 +65,7 @@ struct NewHabitView: View {
         }
         .navigationBarBackButtonHidden(true)
     }
+    
     // Functions
     
     private func saveHabit() {
