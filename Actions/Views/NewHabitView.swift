@@ -48,7 +48,7 @@ struct NewHabitView: View {
                         Text("Done")
                     })
                     .padding()
-                    .background(NavigationLink("", destination: HomeHabitsView(habitData: habitData), isActive: $isHomeHabitsViewActive))
+                    .background(NavigationLink("", destination: HomeHabitsView(habitData: habitData, isDarkMode: .constant(true)), isActive: $isHomeHabitsViewActive))
 
                 }
                 .padding()
@@ -74,13 +74,13 @@ struct NewHabitView: View {
             return
         }
         
-        let newHabit = Habit(context: viewContext)
-        newHabit.title = habitTitle
-        newHabit.themeColor = selectedColor.description
+        let newHabit = HabitEntity(context: viewContext)
+//        newHabit.title = habitTitle
+//        newHabit.themeColor = selectedColor.description
         
         do {
             try viewContext.save()
-            habitData.addHabit(newHabit) // Add the new habit to habitData
+            habitData.addHabit(text: "") // Add the new habit to habitData
             self.presentationMode.wrappedValue.dismiss()
         } catch {
             // Handle the error here.

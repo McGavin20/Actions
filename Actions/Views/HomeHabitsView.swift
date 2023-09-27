@@ -28,43 +28,52 @@ class SoundPlayer {
 
 struct HomeHabitsView: View {
     @ObservedObject var habitData: HabitData
-    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    @Binding var isDarkMode: Bool
     private let soundPlayer = SoundPlayer()
     private let feedback = UIImpactFeedbackGenerator(style: .light)
     @State private var onAddHabitToggle: Bool = false
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .trailing) {
-                Button(action: {
-                    // TOGGLE APPEARANCE
-                    isDarkMode.toggle()
-                    soundPlayer.playSound(soundFileName: "sound-tap")
-                    feedback.impactOccurred()
-                }, label: {
-                    Image(systemName: isDarkMode ? "moon.circle.fill" :  "moon.circle")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .font(.system(.title, design: .rounded))
-                })
+            VStack {
+                HStack {
+                    Text("Actions")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding(.leading)
+                        .foregroundColor(.customSalmonLight)
+                    Spacer()
+                    Button(action: {
+                        // TOGGLE APPEARANCE
+                        isDarkMode.toggle()
+                        soundPlayer.playSound(soundFileName: "sound-tap")
+                        feedback.impactOccurred()
+                    }, label: {
+                        Image(systemName:  self.isDarkMode ? "moon.circle.fill" :  "moon.circle")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .font(.system(.title, design: .rounded))
+                    })
+                    .padding(.trailing)
+                    .foregroundColor(Color.customSalmonLight)
+                } // HSTACK
                 .padding()
-                .foregroundColor(Color.customSalmonLight)
-                
-                // Displayed Habits to be tracked.
-                List {
-                    ForEach(habitData.habits) { habit in
-                        Text("Habit Title: \(habit.title ?? "")")
-                            .foregroundColor(.customGrayLight)
+                ZStack {
+                    // Displayed Habits to be tracked.
+                    List {
+                        ForEach(habitData.habits) { habit in
+                            Text("Habit Title: \(habit.title ?? "")")
+                                .foregroundColor(.customGrayLight)
+                        }
+                        .onDelete(perform: deleteHabit)
                     }
-                    .onDelete(perform: deleteHabit)
                 }
-                
                 //Button to add new habit
                 AddButtonView(habitData: habitData)
                     .onTapGesture {
                         onAddHabitToggle.toggle()
                     }
-                    .padding()
+                    
             }
             .sheet(isPresented: $onAddHabitToggle) {
                 NewHabitView(habitData: habitData)
@@ -81,6 +90,6 @@ struct HomeHabitsView: View {
 
 struct HomeHabitsView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeHabitsView(habitData: HabitData())
+        HomeHabitsView(habitData: HabitData(), isDarkMode: .constant(true))
     }
 }

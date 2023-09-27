@@ -10,14 +10,49 @@ import SwiftUI
 import CoreData
 
 class HabitData: ObservableObject {
-    @Published var habits: [Habit] = [] // Stores the user's habits here
+    @Published var habits: [HabitEntity] = [] // Stores the user's habits here
     
-    func addHabit(_ habit: Habit) {
-        habits.append(habit)
+    // The logic to load up coredata
+    
+    let container: NSPersistentContainer
+    
+    init() {
+        container = NSPersistentContainer(name: "HabitContainer")
+        container.loadPersistentStores { (description, error) in
+            if let error = error {
+                print("ERROR LOADING CORE DATA. \(error)")
+            } else {
+                print("Successfully loaded core data ✅.")
+            }
+        }
+        fetchHabit()
     }
     
-    func deleteHabit(at index: Int) {
-        habits.remove(at: index)
+    // Fetch the Habit data
+    func fetchHabit() {
+        let request = NSFetchRequest<HabitEntity>(entityName: "HabitEntity")
+        
+        do {
+            try container.viewContext.fetch(request)
+        } catch let error {
+            print("Error fetching. \(error) ❌")
+        }
+    }
+    
+    func addHabit(text: String) {
+        let newHabit = HabitEntity(context: container.viewContext)
+        newHabit.title = text
+        saveData()
+    }
+    
+    func saveData() {
+        
+        do {
+            try container.viewContext.save()
+            fetchHabit()
+        } catch let error {
+            print("Error saving. \(error) ❌")
+        }
     }
 }
 

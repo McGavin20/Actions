@@ -8,15 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		BA0338BD2A8E54150062D358 /* ActionsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338BC2A8E54150062D358 /* ActionsApp.swift */; };
-		BA0338BF2A8E54150062D358 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338BE2A8E54150062D358 /* ContentView.swift */; };
 		BA0338C12A8E54180062D358 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA0338C02A8E54180062D358 /* Assets.xcassets */; };
 		BA0338C42A8E54180062D358 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA0338C32A8E54180062D358 /* Preview Assets.xcassets */; };
 		BA0338C62A8E54180062D358 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338C52A8E54180062D358 /* Persistence.swift */; };
-		BA0338C92A8E54180062D358 /* Actions.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA0338C72A8E54180062D358 /* Actions.xcdatamodeld */; };
 		BA0338D12A8E548A0062D358 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338D02A8E548A0062D358 /* WelcomeView.swift */; };
 		BA0338D32A8E58360062D358 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338D22A8E58360062D358 /* DetailsView.swift */; };
 		BA0338D52A8E63BF0062D358 /* NewHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338D42A8E63BF0062D358 /* NewHabitView.swift */; };
 		BA3F17FF2ABDE330001ECC90 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F17FE2ABDE330001ECC90 /* SoundPlayer.swift */; };
+		BA3F18042AC46389001ECC90 /* HabitContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA3F18022AC46389001ECC90 /* HabitContainer.xcdatamodeld */; };
 		BA76FC532A9E19D70080C21E /* HomeHabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC522A9E19D70080C21E /* HomeHabitsView.swift */; };
 		BA76FC562AA755F70080C21E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC552AA755F70080C21E /* ColorExtension.swift */; };
 		BA76FC5B2AA757110080C21E /* sound-rise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA76FC582AA757110080C21E /* sound-rise.mp3 */; };
@@ -33,15 +32,14 @@
 /* Begin PBXFileReference section */
 		BA0338B92A8E54150062D358 /* Actions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Actions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0338BC2A8E54150062D358 /* ActionsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsApp.swift; sourceTree = "<group>"; };
-		BA0338BE2A8E54150062D358 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BA0338C02A8E54180062D358 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA0338C32A8E54180062D358 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BA0338C52A8E54180062D358 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		BA0338C82A8E54180062D358 /* Actions.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Actions.xcdatamodel; sourceTree = "<group>"; };
 		BA0338D02A8E548A0062D358 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		BA0338D22A8E58360062D358 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		BA0338D42A8E63BF0062D358 /* NewHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabitView.swift; sourceTree = "<group>"; };
 		BA3F17FE2ABDE330001ECC90 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		BA3F18032AC46389001ECC90 /* HabitContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HabitContainer.xcdatamodel; sourceTree = "<group>"; };
 		BA76FC522A9E19D70080C21E /* HomeHabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHabitsView.swift; sourceTree = "<group>"; };
 		BA76FC552AA755F70080C21E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		BA76FC582AA757110080C21E /* sound-rise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sound-rise.mp3"; sourceTree = "<group>"; };
@@ -90,10 +88,8 @@
 				BA76FC542AA755C20080C21E /* Utilities */,
 				BA0338CF2A8E546E0062D358 /* Views */,
 				BA0338BC2A8E54150062D358 /* ActionsApp.swift */,
-				BA0338BE2A8E54150062D358 /* ContentView.swift */,
 				BA0338C02A8E54180062D358 /* Assets.xcassets */,
 				BA0338C52A8E54180062D358 /* Persistence.swift */,
-				BA0338C72A8E54180062D358 /* Actions.xcdatamodeld */,
 				BA0338C22A8E54180062D358 /* Preview Content */,
 			);
 			path = Actions;
@@ -146,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				BA76FC6F2AB202E10080C21E /* HabitData.swift */,
+				BA3F18022AC46389001ECC90 /* HabitContainer.xcdatamodeld */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -233,11 +230,10 @@
 				BA76FC642AA765140080C21E /* FrequencyView.swift in Sources */,
 				BA0338D52A8E63BF0062D358 /* NewHabitView.swift in Sources */,
 				BA76FC562AA755F70080C21E /* ColorExtension.swift in Sources */,
-				BA0338C92A8E54180062D358 /* Actions.xcdatamodeld in Sources */,
 				BA76FC622AA75C1F0080C21E /* CircleColorPicker.swift in Sources */,
-				BA0338BF2A8E54150062D358 /* ContentView.swift in Sources */,
 				BA0338BD2A8E54150062D358 /* ActionsApp.swift in Sources */,
 				BA76FC532A9E19D70080C21E /* HomeHabitsView.swift in Sources */,
+				BA3F18042AC46389001ECC90 /* HabitContainer.xcdatamodeld in Sources */,
 				BA0338D32A8E58360062D358 /* DetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,13 +437,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		BA0338C72A8E54180062D358 /* Actions.xcdatamodeld */ = {
+		BA3F18022AC46389001ECC90 /* HabitContainer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BA0338C82A8E54180062D358 /* Actions.xcdatamodel */,
+				BA3F18032AC46389001ECC90 /* HabitContainer.xcdatamodel */,
 			);
-			currentVersion = BA0338C82A8E54180062D358 /* Actions.xcdatamodel */;
-			path = Actions.xcdatamodeld;
+			currentVersion = BA3F18032AC46389001ECC90 /* HabitContainer.xcdatamodel */;
+			path = HabitContainer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
