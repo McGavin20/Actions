@@ -12,11 +12,11 @@ struct NewHabitView: View {
     // Properties
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
-    
+    @StateObject var vm = HabitData()
     @State private var habitTitle = ""
     @State private var selectedColor: Color = .customGrayLight // Default Color
     @State private var isHomeHabitsViewActive = false
-    @ObservedObject var habitData: HabitData // Inject the habit data
+    @ObservedObject var habitData: HabitData 
         
 
     var body: some View {
@@ -34,18 +34,21 @@ struct NewHabitView: View {
                     
                     Button(action: {
                         if !habitTitle.isEmpty {
-                            // Perform the action when habitTitle is not empty
-                            print("Button pressed: Done")
+                            guard !habitTitle.isEmpty else { return }
+                            vm.addHabit(text: habitTitle)
+                            habitTitle = ""
+                            print("New Habit was Added ✅")
                             // Activate the navigation to HomeHabitsView and pass the habitData
                             self.isHomeHabitsViewActive = true
                         } else {
+                            
                             // Show an alert or provide some feedback to the user
                             // indicating that the title should not be empty.
                             // For example:
                             // self.showEmptyTitleAlert = true
                         }
                     }, label: {
-                        Text("Done")
+                        Text("Save")
                     })
                     .padding()
                     .background(NavigationLink("", destination: HomeHabitsView(habitData: habitData, isDarkMode: .constant(true)), isActive: $isHomeHabitsViewActive))

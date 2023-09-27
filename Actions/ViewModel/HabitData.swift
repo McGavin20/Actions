@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 class HabitData: ObservableObject {
-    @Published var habits: [HabitEntity] = [] // Stores the user's habits here
+    @Published var savedEntities: [HabitEntity] = [] // Stores the user's habits here
     
     // The logic to load up coredata
     
@@ -22,7 +22,7 @@ class HabitData: ObservableObject {
             if let error = error {
                 print("ERROR LOADING CORE DATA. \(error)")
             } else {
-                print("Successfully loaded core data ✅.")
+               
             }
         }
         fetchHabit()
@@ -33,7 +33,7 @@ class HabitData: ObservableObject {
         let request = NSFetchRequest<HabitEntity>(entityName: "HabitEntity")
         
         do {
-            try container.viewContext.fetch(request)
+            savedEntities = try container.viewContext.fetch(request)
         } catch let error {
             print("Error fetching. \(error) ❌")
         }

@@ -28,6 +28,7 @@ class SoundPlayer {
 
 struct HomeHabitsView: View {
     @ObservedObject var habitData: HabitData
+    @StateObject var vm = HabitData()
     @Binding var isDarkMode: Bool
     private let soundPlayer = SoundPlayer()
     private let feedback = UIImpactFeedbackGenerator(style: .light)
@@ -61,8 +62,8 @@ struct HomeHabitsView: View {
                 ZStack {
                     // Displayed Habits to be tracked.
                     List {
-                        ForEach(habitData.habits) { habit in
-                            Text("Habit Title: \(habit.title ?? "")")
+                        ForEach(vm.savedEntities) { entity in
+                            Text(entity.title ?? "NO NAME")
                                 .foregroundColor(.customGrayLight)
                         }
                         .onDelete(perform: deleteHabit)
