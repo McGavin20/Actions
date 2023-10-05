@@ -14,7 +14,6 @@
 		BA0338D12A8E548A0062D358 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338D02A8E548A0062D358 /* WelcomeView.swift */; };
 		BA0338D32A8E58360062D358 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338D22A8E58360062D358 /* DetailsView.swift */; };
 		BA0338D52A8E63BF0062D358 /* NewHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0338D42A8E63BF0062D358 /* NewHabitView.swift */; };
-		BA3F17FF2ABDE330001ECC90 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F17FE2ABDE330001ECC90 /* SoundPlayer.swift */; };
 		BA3F18042AC46389001ECC90 /* HabitContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA3F18022AC46389001ECC90 /* HabitContainer.xcdatamodeld */; };
 		BA76FC532A9E19D70080C21E /* HomeHabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC522A9E19D70080C21E /* HomeHabitsView.swift */; };
 		BA76FC562AA755F70080C21E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC552AA755F70080C21E /* ColorExtension.swift */; };
@@ -27,6 +26,7 @@
 		BA76FC662AA8A0BD0080C21E /* WeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC652AA8A0BD0080C21E /* WeeklyView.swift */; };
 		BA76FC682AAF3ED60080C21E /* AddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC672AAF3ED60080C21E /* AddButtonView.swift */; };
 		BA76FC702AB202E10080C21E /* HabitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76FC6F2AB202E10080C21E /* HabitData.swift */; };
+		BA8CE3FA2ACDB2710081DB6B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8CE3F92ACDB2710081DB6B /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +38,6 @@
 		BA0338D02A8E548A0062D358 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		BA0338D22A8E58360062D358 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		BA0338D42A8E63BF0062D358 /* NewHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabitView.swift; sourceTree = "<group>"; };
-		BA3F17FE2ABDE330001ECC90 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		BA3F18032AC46389001ECC90 /* HabitContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HabitContainer.xcdatamodel; sourceTree = "<group>"; };
 		BA76FC522A9E19D70080C21E /* HomeHabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHabitsView.swift; sourceTree = "<group>"; };
 		BA76FC552AA755F70080C21E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		BA76FC652AA8A0BD0080C21E /* WeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyView.swift; sourceTree = "<group>"; };
 		BA76FC672AAF3ED60080C21E /* AddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonView.swift; sourceTree = "<group>"; };
 		BA76FC6F2AB202E10080C21E /* HabitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitData.swift; sourceTree = "<group>"; };
+		BA8CE3F92ACDB2710081DB6B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +114,7 @@
 				BA76FC632AA765140080C21E /* FrequencyView.swift */,
 				BA76FC652AA8A0BD0080C21E /* WeeklyView.swift */,
 				BA76FC672AAF3ED60080C21E /* AddButtonView.swift */,
+				BA8CE3F92ACDB2710081DB6B /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -123,7 +124,6 @@
 			children = (
 				BA76FC552AA755F70080C21E /* ColorExtension.swift */,
 				BA76FC5E2AA7575E0080C21E /* HideKeyBoardExtension.swift */,
-				BA3F17FE2ABDE330001ECC90 /* SoundPlayer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -222,7 +222,6 @@
 			files = (
 				BA76FC682AAF3ED60080C21E /* AddButtonView.swift in Sources */,
 				BA76FC5F2AA7575E0080C21E /* HideKeyBoardExtension.swift in Sources */,
-				BA3F17FF2ABDE330001ECC90 /* SoundPlayer.swift in Sources */,
 				BA76FC702AB202E10080C21E /* HabitData.swift in Sources */,
 				BA0338D12A8E548A0062D358 /* WelcomeView.swift in Sources */,
 				BA0338C62A8E54180062D358 /* Persistence.swift in Sources */,
@@ -232,6 +231,7 @@
 				BA76FC562AA755F70080C21E /* ColorExtension.swift in Sources */,
 				BA76FC622AA75C1F0080C21E /* CircleColorPicker.swift in Sources */,
 				BA0338BD2A8E54150062D358 /* ActionsApp.swift in Sources */,
+				BA8CE3FA2ACDB2710081DB6B /* ContentView.swift in Sources */,
 				BA76FC532A9E19D70080C21E /* HomeHabitsView.swift in Sources */,
 				BA3F18042AC46389001ECC90 /* HabitContainer.xcdatamodeld in Sources */,
 				BA0338D32A8E58360062D358 /* DetailsView.swift in Sources */,

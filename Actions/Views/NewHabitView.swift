@@ -12,88 +12,153 @@ struct NewHabitView: View {
     // Properties
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var vm = HabitData()
+    @Environment(\.self) var env
+    @StateObject var habitModel: HabitViewModel = .init()
+    @StateObject var vm = HabitViewModel()
     @State private var habitTitle = ""
     @State private var selectedColor: Color = .customGrayLight // Default Color
     @State private var isHomeHabitsViewActive = false
-    @ObservedObject var habitData: HabitData 
         
 
     var body: some View {
         NavigationView {
             VStack {
+                VStack {
+                    Text("Habit")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                    Text("Name it something short and memorable.")
+                        .font(.caption2)
+                        .foregroundColor(Color.customGrayLight)
+                } //Title
+                
+                //TextField for Ttile
+                TextField("Habit Title", text: $habitModel.title)
+                    .padding(.vertical, 10)
+                    .background(Color.customGrayMedium.opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                
+                Divider()
+                    .padding(.vertical, 10)
+                CircleColorPicker(selectedColor: $selectedColor)
+                    .padding(.vertical)
+                Divider()
+                    .padding(.vertical, 10)
+                FrequencyView()
+                    .padding()
+                Divider()
+                    .padding(.vertical, 10)
+                
+                
+                // Hiding if Notification Access is rejected
                 HStack {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Reminder")
+                            .fontWeight(.semibold)
+                        
+                        Text("Just Notification")
+                            .font(.caption)
+                            .foregroundColor(.customSalmonLight)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .top)
+                    
+                    Toggle(isOn: $habitModel.isRemainderOn) {}
+                        .labelsHidden()
+                }
+                .opacity(habitModel.notificationAccess ? 1 : 0)
+                
+                HStack(spacing: 12) {
+                    Label {
+                        Text(habitModel.remainderDate.formatted(date: .omitted, time: .shortened))
+                    } icon: {
+                        Image(systemName: "clock")
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical,12)
+                    .background(Color.customSalmonLight.opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    .onTapGesture {
+                        habitModel.showTimePicker.toggle()
+                    }
+                    TextField("Remainder Text", text: $habitModel.remainderText)
+                        .padding(.vertical, 10)
+                        .background(Color.customGrayMedium.opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                }
+                .frame(height: habitModel.isRemainderOn ? nil : 0)
+                .opacity(habitModel.isRemainderOn ? 1 : 0)
+                .opacity(habitModel.notificationAccess ? 1 : 0)
+            }
+            .animation(.easeInOut, value: habitModel.isRemainderOn)
+            .frame(maxHeight: .infinity, alignment: .top)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
+                        env.dismiss()
                         print("Button pressed: Cancel")
                     }, label: {
                         Text("Cancel")
                     })
-                    
-                    Spacer()
-                    
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        if !habitTitle.isEmpty {
-                            guard !habitTitle.isEmpty else { return }
-                            vm.addHabit(text: habitTitle)
-                            habitTitle = ""
-                            print("New Habit was Added ✅")
-                            // Activate the navigation to HomeHabitsView and pass the habitData
-                            self.isHomeHabitsViewActive = true
-                        } else {
-                            
-                            // Show an alert or provide some feedback to the user
-                            // indicating that the title should not be empty.
-                            // For example:
-                            // self.showEmptyTitleAlert = true
+                        if habitModel.deleteHabit(context: env.managedObjectContext) {
+                            print("Button pressed: Delete")
+                            env.dismiss()
+                        }
+                        
+                    }, label: {
+                        Image(systemName: "trash")
+                    })
+                    .tint(.red)
+                    .opacity(habitModel.editHabit == nil ? 0 : 1)
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        Task {
+                            if await habitModel.addNewHabit(context: env.managedObjectContext) {
+                                env.dismiss()
+                            }
                         }
                     }, label: {
                         Text("Save")
                     })
                     .padding()
-                    .background(NavigationLink("", destination: HomeHabitsView(habitData: habitData, isDarkMode: .constant(true)), isActive: $isHomeHabitsViewActive))
-
+                    .tint(.customSalmonLight)
+                    .disabled(!habitModel.doneStatus())
+                    //.background(NavigationLink("", destination: HomeHabitsView(habitData: habitData, isDarkMode: .constant(true)), isActive: $isHomeHabitsViewActive))
                 }
-                .padding()
                 
-                
-                TextField("Habit Title", text: $habitTitle)
-                    .textFieldStyle(.plain)
-                    .padding()
-                CircleColorPicker(selectedColor: $selectedColor)
-                FrequencyView()
-                    .padding()
-                Spacer()
             }
         }
-        .navigationBarBackButtonHidden(true)
-    }
-    
-    // Functions
-    
-    private func saveHabit() {
-        guard !habitTitle.isEmpty else {
-            // Show an alert or provide feedback to the user about the empty title.
-            return
-        }
-        
-        let newHabit = HabitEntity(context: viewContext)
-//        newHabit.title = habitTitle
-//        newHabit.themeColor = selectedColor.description
-        
-        do {
-            try viewContext.save()
-            habitData.addHabit(text: "") // Add the new habit to habitData
-            self.presentationMode.wrappedValue.dismiss()
-        } catch {
-            // Handle the error here.
-            print("Error saving habit: \(error.localizedDescription)")
+        .overlay {
+            if habitModel.showTimePicker {
+                ZStack {
+                    Rectangle()
+                        .fill(.ultraThinMaterial)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            habitModel.showTimePicker.toggle()
+                        }
+                    
+                    DatePicker.init("", selection: $habitModel.remainderDate, displayedComponents: [.hourAndMinute])
+                        .datePickerStyle(.wheel)
+                        .labelsHidden()
+                        .padding()
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.customSalmonLight)
+                        }
+                        .padding()
+                }
+            }
         }
     }
 }
 
 struct NewHabitView_Previews: PreviewProvider {
     static var previews: some View {
-        NewHabitView(habitData: HabitData())
+        NewHabitView()
+            .environmentObject(HabitViewModel())
     }
 }

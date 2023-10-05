@@ -16,7 +16,6 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
             let newhabit = HabitEntity(context: viewContext)
-            //newhabit.timestamp = Date()
         }
         do {
             try viewContext.save()

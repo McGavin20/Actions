@@ -12,7 +12,6 @@ struct AddButtonView: View {
     
     @State private var isAnimated: Bool = false
     @State private var isAddingNewHabit = false
-    @ObservedObject var habitData: HabitData
     private let soundPlayer = SoundPlayer()
     
     var body: some View {
@@ -45,7 +44,7 @@ struct AddButtonView: View {
 
 struct AddButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        AddButtonView(habitData: HabitData())
+        AddButtonView()
     }
 }
 

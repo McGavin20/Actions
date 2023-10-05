@@ -14,7 +14,7 @@ struct ActionsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeHabitsView(habitData: HabitData(), isDarkMode: $isDarkMode)
+            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

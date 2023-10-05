@@ -27,9 +27,8 @@ class SoundPlayer {
 }
 
 struct HomeHabitsView: View {
-    @ObservedObject var habitData: HabitData
-    @StateObject var vm = HabitData()
-    @Binding var isDarkMode: Bool
+    @FetchRequest(entity: HabitEntity.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \HabitEntity.dateAdded, ascending: false)], predicate: nil, animation: .easeInOut) var habits: FetchedResults<HabitEntity>
+    @StateObject var habitModel: HabitViewModel = .init()
     private let soundPlayer = SoundPlayer()
     private let feedback = UIImpactFeedbackGenerator(style: .light)
     @State private var onAddHabitToggle: Bool = false
@@ -37,60 +36,157 @@ struct HomeHabitsView: View {
     var body: some View {
         NavigationView {
             VStack {
+                // Navigation Title
                 HStack {
                     Text("Actions")
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.leading)
                         .foregroundColor(.customSalmonLight)
-                    Spacer()
-                    Button(action: {
-                        // TOGGLE APPEARANCE
-                        isDarkMode.toggle()
-                        soundPlayer.playSound(soundFileName: "sound-tap")
-                        feedback.impactOccurred()
-                    }, label: {
-                        Image(systemName:  self.isDarkMode ? "moon.circle.fill" :  "moon.circle")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .font(.system(.title, design: .rounded))
-                    })
-                    .padding(.trailing)
-                    .foregroundColor(Color.customSalmonLight)
+//                    Spacer()
+//                    Button(action: {
+//                        // TOGGLE APPEARANCE
+//                        isDarkMode.toggle()
+//                        soundPlayer.playSound(soundFileName: "sound-tap")
+//                        feedback.impactOccurred()
+//                    }, label: {
+//                        Image(systemName:  self.isDarkMode ? "moon.circle.fill" :  "moon.circle")
+//                            .resizable()
+//                            .frame(width: 24, height: 24)
+//                            .font(.system(.title, design: .rounded))
+//                    })
+//                    .padding(.trailing)
+//                    .foregroundColor(Color.customSalmonLight)
                 } // HSTACK
-                .padding()
-                ZStack {
-                    // Displayed Habits to be tracked.
-                    List {
-                        ForEach(vm.savedEntities) { entity in
-                            Text(entity.title ?? "NO NAME")
-                                .foregroundColor(.customGrayLight)
+                .padding(.bottom, 10)
+                
+                // Main View
+                ScrollView(habits.isEmpty ? .init() : .vertical, showsIndicators: false) {
+                    VStack(spacing: 15) {
+                        // Displayed Habits to be tracked.
+                        ForEach(habits) { habit in
+                            HabitCardView(habit: habit)
                         }
-                        .onDelete(perform: deleteHabit)
+                    }
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .padding()
+                    .sheet(isPresented: $habitModel.addNewHabit) {
+                        habitModel.resetData()
+                    } content: {
+                        NewHabitView()
+                            .environmentObject(habitModel)
                     }
                 }
+                
+                
                 //Button to add new habit
-                AddButtonView(habitData: habitData)
+                AddButtonView()
                     .onTapGesture {
                         onAddHabitToggle.toggle()
+                        habitModel.addNewHabit.toggle()
                     }
                     
             }
             .sheet(isPresented: $onAddHabitToggle) {
-                NewHabitView(habitData: habitData)
+                NewHabitView()
             }
             
         }
+        
         .navigationBarBackButtonHidden(true)
     }
+    // Habit Card View
     
-    private func deleteHabit(offsets: IndexSet) {
-        // Handle deletion here, including removing the habit from habitData.habits
+    func HabitCardView(habit: HabitEntity)->some View {
+        VStack(spacing: 6){
+            HStack{
+                Text(habit.title ?? "")
+                    .font(.callout)
+                    .fontWeight(.semibold)
+                    .lineLimit(1)
+                
+                Image(systemName: "ball.badge.fill")
+                    .font(.callout)
+                    .foregroundColor(habit.color ?? .customGrayMedium)
+                    .scaleEffect(0.9)
+                    .opacity(habit.isRemainderOn ? 1 : 0)
+                
+                Spacer()
+                
+                let count = (habit.weekDays?.count ?? 0)
+                Text(count == 7 ? "Daily": "\(count) times a week")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+            .padding(.horizontal, 10)
+            
+            // Displaying Current Week and Marking Active Dates of Habit
+            let calender = Calendar.current
+            let currentWeek = calender.dateInterval(of: .weekOfMonth, for: Date())
+            let symbols = calender.weekdaySymbols
+            let startDate = currentWeek?.start ?? Date()
+            let activeWeekDays = habit.weekDays ?? []
+            let activePlot = symbols.indices.compactMap { index -> (String, Date) in
+                let currentDate = calender.date(byAdding: .day, value: index, to: startDate)
+                return (symbols[index], currentDate!)
+            }
+            
+            HStack(spacing: 10) {
+                ForEach(activePlot.indices, id: \.self) {index in
+                    let item = activePlot[index]
+                    
+                    VStack(spacing: 6) {
+                        // Limiting to first three letters
+                        Text(item.0.prefix(3))
+                            .font(.caption)
+                            .foregroundColor(.customGrayMedium)
+                        
+                        let status = activeWeekDays.contains { day in
+                            return day == item.0
+                        }
+                        
+                        Text(getDate(date: item.1))
+                            .font(.system(size: 14))
+                            .fontWeight(.semibold)
+                            .padding(8)
+                            .background {
+                                Circle()
+                                    .fill(Color(habit.color ?? Color.customGrayMedium))
+                                    .opacity(status ? 1 : 0)
+                            }
+                    }
+                    .frame().frame(maxWidth: .infinity)
+                    
+                }
+            }
+            .padding(.top, 15)
+        }
+        .padding(.vertical)
+        .padding(.horizontal, 6)
+        .background() {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Color.customIndigoMedium.opacity(0.5))
+        }
+        .onTapGesture {
+            // Editing Habit
+            habitModel.editHabit = habit
+            habitModel.restoreEditData()
+            habitModel.addNewHabit.toggle()
+        }
+    }
+    
+    // Formatting date
+    func getDate(date: Date)->String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd"
+        
+        
+        return formatter.string(from: date)
     }
 }
 
 struct HomeHabitsView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeHabitsView(habitData: HabitData(), isDarkMode: .constant(true))
+        ContentView()
     }
 }

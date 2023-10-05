@@ -8,26 +8,36 @@
 import SwiftUI
 
 struct CircleColorPicker: View {
+    @StateObject var habitModel: HabitViewModel = .init()
     @Binding var selectedColor: Color
     
     
-    let colors: [Color] = [
-        .customGrayLight,
-        .customGreenDark,
-        .customGrayMedium,
-        .customGreenLight,
-        .customSalmonLight,
-        .customIndigoMedium,
-        .customGreenMedium
-    ]
+//    let colors: [Color] = [
+//        .customGrayLight,
+//        .customGreenDark,
+//        .customGrayMedium,
+//        .customGreenLight,
+//        .customSalmonLight,
+//        .customIndigoMedium,
+//        .customGreenMedium
+//    ]
     var body: some View {
         HStack(spacing: 8) {
-            ForEach(colors, id: \.self) { color in
+            ForEach(1...7, id: \.self) { index in
+                let color = "Card-\(index)"
                 Circle()
-                    .fill(color)
+                    .fill(Color(color))
                     .frame(width: 30, height: 30)
+                    .overlay(content: {
+                        if color == habitModel.habitColor {
+                            Image(systemName: "checkmark")
+                                .font(.caption.bold())
+                        }
+                    })
                     .onTapGesture {
-                        self.selectedColor = color
+                        withAnimation {
+                            habitModel.habitColor = color
+                        }
                     }
             }
         }
